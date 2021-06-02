@@ -1,15 +1,17 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace DatabaseProject2
 {
     public class Operations
     {
         private readonly string _connectionString =
-            @"Data Source=localhost;Initial Catalog=AdventureWorks2012;User ID=sa;Password=Onur-1234;Connection Timeout = 6000";
+            @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=AdventureWorks2012;Integrated Security=True;Connection Timeout = 6000";
 
         private readonly SqlCommand _command;
+        private TimeSpan averageTime;
 
         public Operations(String query)
         {
@@ -41,21 +43,38 @@ namespace DatabaseProject2
 
             DateTime endTime = DateTime.Now;
             TimeSpan elapsed = endTime - beginTime;
-            Console.Write("Birim ölçüm sonucu(toplam süre) : " + elapsed);
+            Console.WriteLine(beginTime + " " + endTime);
+            Console.Write("Birim ölçüm sonucu(toplam süre) : " + elapsed );
             return elapsed;
         }
 
         public void RunQuery100Times()
         {
             TimeSpan totalTime = TimeSpan.Zero;
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 15; i++)
             {
                 totalTime += RunQuery();
-                Console.WriteLine(" (100/" + (i + 1) + ")");
+                Console.WriteLine(" (100/" + (i + 1) + ")" + "\n");
             }
 
-            TimeSpan averageTime = totalTime / 100;
-            Console.WriteLine("100 ölçüm sonucu(ortalama süre) : " + averageTime);
+            averageTime = totalTime / 15;
+            Console.WriteLine("100 ölçüm sonucu(ortalama süre) : " + averageTime + "\n");
+        }
+
+        public void writeToFile(string fileName, string numberOfQuery)
+        {
+            string[] lines =
+            {
+                "***************************************************************",
+                " ",
+                "After Indexes",
+                "Query"+numberOfQuery+" : Average Tine is " + averageTime ,
+                " ",
+                "***************************************************************\n"
+            };
+
+            File.AppendAllLines(fileName, lines);
+            averageTime = TimeSpan.Zero;
         }
     }
 }
