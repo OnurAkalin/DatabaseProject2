@@ -1,0 +1,22 @@
+CREATE INDEX Q1IndexOnlineOrderFlagANDOrderDateWithShipToAddressId
+    ON Sales.SalesOrderHeader (OnlineOrderFlag, OrderDate)
+    INCLUDE (ShipToAddressID)
+
+CREATE INDEX Q1ProductIdWithOrderQtyAndLineTotal
+    ON Sales.SalesOrderDetail (ProductID)
+    INCLUDE (OrderQty, LineTotal)
+
+
+-------------------------------------------------------------------
+
+CREATE INDEX Q3ProductIdWithOrderQtyAndLineTotal
+    ON Sales.SalesOrderDetail (ProductID)
+    INCLUDE (OrderQty, LineTotal)
+
+CREATE INDEX Q3IndexOnlineOrderFlagANDOrderDateWithCustomerId
+    ON Sales.SalesOrderHeader (OnlineOrderFlag, OrderDate)
+    INCLUDE (CustomerID)
+
+CREATE INDEX Q3IndexStoreName
+    ON Sales.Store (BusinessEntityID)
+    INCLUDE (Name)
