@@ -51,7 +51,7 @@ namespace DatabaseProject2
         public void RunQuery100Times()
         {
             TimeSpan totalTime = TimeSpan.Zero;
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 100; i++)
             {
                 totalTime += RunQuery();
                 Console.WriteLine(" (100/" + (i + 1) + ")" + "\n");
@@ -68,7 +68,7 @@ namespace DatabaseProject2
                 "***************************************************************",
                 " ",
                 "After Indexes",
-                "Query"+numberOfQuery+" : Average Tine is " + averageTime ,
+                "Query"+numberOfQuery+" : Average Time is " + averageTime ,
                 " ",
                 "***************************************************************\n"
             };

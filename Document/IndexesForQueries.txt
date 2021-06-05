@@ -13,13 +13,16 @@ ON [Sales].[SalesOrderHeader] (SalesOrderID)
 INCLUDE (OrderDate)
 
 CREATE NONCLUSTERED INDEX IX_PRODUCTION_PRODUCT_COLOR_MAKEFLAG_FINISHEDGOODSFLAG
-ON [Production].[Product] ( [Color] DESC ,[MakeFlag] DESC , [FinishedGoodsFlag] DESC )
+ON [Production].[Product] ([MakeFlag] DESC , [FinishedGoodsFlag] DESC,[Color] DESC  )
 INCLUDE (ProductSubcategoryID)
 
 CREATE NONCLUSTERED INDEX IX_PRODUCTION_PRODUCTCATEGORY_PRODUCTCATEGORYID
 ON Production.ProductCategory ( ProductCategoryID  )
 INCLUDE (Name)
 
+CREATE NONCLUSTERED INDEX IX_SALES_SALESORDERHEADER_ONLINEORDERFLAG_ORDERDATE_INC3
+ON [Sales].[SalesOrderHeader] ([OnlineOrderFlag],[OrderDate])
+WHERE OnlineOrderFlag = 1
 
 /*Query3*/
 CREATE NONCLUSTERED INDEX IX_SALESSTORE_BUSSINESENTITYID
@@ -33,3 +36,4 @@ INCLUDE (StoreID)
 CREATE NONCLUSTERED INDEX IX_SALES_SALESORDERHEADER_ONLINEORDERFLAG_ORDERDATE_INC2
 ON [Sales].[SalesOrderHeader] ([OnlineOrderFlag],[OrderDate])
 INCLUDE ([SalesOrderID], [CustomerID])
+WHERE OnlineOrderFlag = 0
