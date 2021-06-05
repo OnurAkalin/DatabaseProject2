@@ -57,11 +57,11 @@ namespace DatabaseProject2
                 Console.WriteLine(" (100/" + (i + 1) + ")" + "\n");
             }
 
-            averageTime = totalTime / 15;
+            averageTime = totalTime / 100;
             Console.WriteLine("100 ölçüm sonucu(ortalama süre) : " + averageTime + "\n");
         }
 
-        public void writeToFile(string fileName, string numberOfQuery)
+        public void WriteToFile(string fileName, string numberOfQuery)
         {
             string[] lines =
             {
